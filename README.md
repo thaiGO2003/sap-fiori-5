@@ -21,7 +21,8 @@ Trang web hướng dẫn chi tiết bằng tiếng Việt về cách tạo một
 
 ## 📚 Nội dung
 
-Trang web bao gồm các chương sau:
+### Option 1: Single Page (index.html)
+Tất cả hướng dẫn trong 1 trang duy nhất, bao gồm:
 
 1. **Yêu cầu tiên quyết** - Setup môi trường SAP BTP
 2. **Tạo Project** - Khởi tạo ứng dụng Fiori Elements
@@ -32,6 +33,16 @@ Trang web bao gồm các chương sau:
 7. **Deploy** - Triển khai lên SAP BTP
 8. **Tùy chỉnh** - Mở rộng ứng dụng
 9. **Tổng kết** - Resources và next steps
+
+### Option 2: Multi-Page (index-multi.html)
+Nhiều trang riêng biệt cho từng bài học - lý tưởng khi có nhiều bài:
+- 📖 Trang chủ liệt kê tất cả bài học
+- 🔍 Search và filter
+- 📊 Progress tracking
+- 🎯 Navigation giữa các bài
+- 📝 Template để tạo bài mới
+
+📖 **Xem hướng dẫn**: [MULTI-PAGE-GUIDE.md](MULTI-PAGE-GUIDE.md) | [COMPARE.md](COMPARE.md)
 
 ## 🛠️ Tech Stack
 
