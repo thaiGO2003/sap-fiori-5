@@ -6,8 +6,8 @@
 
 ## 📦 Tổng quan Project
 
-- **Tổng số files**: 7 files
-- **Tổng dung lượng**: ~35 KB
+- **Tổng số files**: 11 files (HTML + MD + Config)
+- **Tổng dung lượng**: ~75 KB
 - **Ngôn ngữ**: Tiếng Việt
 - **Platform**: GitHub Pages với CI/CD
 
@@ -15,11 +15,17 @@
 
 | File | Kích thước | Mô tả |
 |------|-----------|-------|
-| `index.html` | 23.26 KB | Trang web chính, chứa toàn bộ nội dung tutorial |
+| `index.html` | 23.26 KB | Single page tutorial - tất cả trong 1 trang |
+| `index-multi.html` | 14.02 KB | Multi-page course index - danh sách bài học |
+| `template-lesson.html` | 11.15 KB | Template để tạo bài học mới |
+| `DEPLOYMENT-SUMMARY.md` | 9.75 KB | Chi tiết về CI/CD deployment |
+| `MULTI-PAGE-GUIDE.md` | 8.23 KB | Hướng dẫn sử dụng multi-page |
+| `SUMMARY.md` | 4.79 KB | Tổng quan toàn bộ project |
+| `COMPARE.md` | 5.49 KB | So sánh single vs multi-page |
 | `QUICKSTART.md` | 4.36 KB | Hướng dẫn nhanh để bắt đầu |
-| `DEPLOY.md` | 3.07 KB | Hướng dẫn chi tiết về deploy |
-| `README.md` | 2.66 KB | Mô tả tổng quan project |
-| `.github/workflows/deploy.yml` | 0.74 KB | CI/CD automation |
+| `DEPLOY.md` | 5.67 KB | Hướng dẫn chi tiết về deploy |
+| `README.md` | 3.52 KB | Mô tả tổng quan project |
+| `.github/workflows/deploy.yml` | 1.16 KB | CI/CD automation |
 | `package.json` | 0.66 KB | Package configuration |
 | `.gitignore` | 0.35 KB | Git ignore rules |
 
@@ -44,14 +50,19 @@
 - ✅ Resources bổ sung
 
 ### ✅ CI/CD Automation
-- ✅ GitHub Actions
-- ✅ Auto-deploy khi push
+- ✅ GitHub Actions workflow
+- ✅ Auto-deploy khi push lên main
 - ✅ GitHub Pages integration
-- ✅ Status checks
+- ✅ Verify deployment URLs
+- ✅ Multi-page support
+- ✅ Manual trigger option
 
 ### ✅ Documentation
 - ✅ README.md chi tiết
-- ✅ DEPLOY.md step-by-step
+- ✅ DEPLOY.md step-by-step (updated với multi-page)
+- ✅ DEPLOYMENT-SUMMARY.md CI/CD details
+- ✅ MULTI-PAGE-GUIDE.md hướng dẫn multi-page
+- ✅ COMPARE.md single vs multi comparison
 - ✅ QUICKSTART.md cho người mới
 - ✅ SUMMARY.md tổng hợp
 
