@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tool Services: Khởi tạo SAP Build Code</title>
+    <style>body{font-family:system-ui,Arial,sans-serif;max-width:980px;margin:24px auto;padding:0 16px;line-height:1.65}pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto}code{font-family:ui-monospace,Consolas,monospace}.topbar{position:sticky;top:0;background:#0f1221;color:#e8eaf6;border:1px solid #24263b;border-radius:12px;padding:10px 12px;display:flex;gap:12px;align-items:center;margin-bottom:16px}.topbar a{color:#e8eaf6;text-decoration:none;background:#171a2b;border:1px solid #2a2d47;padding:8px 10px;border-radius:10px}.topbar input{flex:1;min-width:200px;padding:8px 10px;border-radius:10px;border:1px solid #2a2d47;background:#171a2b;color:#e8eaf6}</style>
+  </head>
+  <body>
+    <div class="topbar">
+      <a href="/">🏠 Home</a>
+      <a href="/index.html#fe">Fiori Elements</a>
+      <a href="/index.html#ff">Fiori Free Style</a>
+      <a href="/index.html#tools">Tool Services</a>
+      <input id="q" placeholder="Tìm kiếm... (Enter để tìm)">
+    </div>
+    <script>document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter'){location.href='/'+'?q='+encodeURIComponent(e.target.value)}})</script>
+    <h1>Khởi tạo SAP Build Code</h1>
+    <p>Tài liệu gốc: <a href="https://help.sap.com/docs/build_code/d0d8f5bfc3d640478854e6f4e7c7584a/07698d7c31284e4db370acdf017cfd14.html" target="_blank" rel="noopener">SAP Help – SAP Build Code</a></p>
+
+    <h2>1) Yêu cầu</h2>
+    <ul>
+      <li>Tài khoản SAP BTP có quyền truy cập SAP Build Code</li>
+      <li>Đã tạo subaccount, space và quota phù hợp</li>
+    </ul>
+
+    <h2>2) Các bước khởi tạo (tóm tắt)</h2>
+    <ol>
+      <li>Vào SAP BTP Cockpit → Subaccount → Service Marketplace → Tìm "SAP Build Code"</li>
+      <li>Chọn plan phù hợp → Create instance</li>
+      <li>Gắn service keys/roles cần thiết cho nhà phát triển</li>
+      <li>Mở SAP Build Code và tạo workspace dự án mới</li>
+    </ol>
+
+    <h2>3) Gợi ý cấu hình dự án</h2>
+    <ul>
+      <li>Chọn template phù hợp (FE/Freestyle) nếu có</li>
+      <li>Khai báo destinations để truy cập OData v2/v4</li>
+      <li>Bật CI/CD (nếu dùng) hoặc thiết lập Git integration</li>
+    </ul>
+
+    <h2>4) Liên kết</h2>
+    <ul>
+      <li><a href="https://help.sap.com/docs/build_code/d0d8f5bfc3d640478854e6f4e7c7584a/07698d7c31284e4db370acdf017cfd14.html" target="_blank" rel="noopener">Hướng dẫn Khởi tạo SAP Build Code</a></li>
+    </ul>
+  </body>
+  </html>
+
+

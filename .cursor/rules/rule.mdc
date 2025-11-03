@@ -1,0 +1,55 @@
+# Repo rules
+
+## Mục tiêu
+- Frontend-only: render dữ liệu từ OData V2/V4 (không có backend trong repo này).
+- Cổng hướng dẫn (guides portal) cho: Fiori Elements, Fiori Free Style, Tool Services.
+- Trang chủ có thanh tìm kiếm, phân nhóm, mở các file HTML tĩnh trong `public/`.
+
+## Cấu trúc thư mục
+```
+public/
+  guides/
+    fiori-elements/
+      <category>/
+        <slug>.html
+    fiori-freestyle/
+      <category>/
+        <slug>.html
+    tool-services/
+      <category>/
+        <slug>.html
+src/
+  utils/guidesManifest.ts   # Danh sách guides hiển thị trên trang chủ
+  ui/App.tsx                # Trang chủ
+  ui/styles.css             # Style trang chủ
+```
+
+## Quy ước đặt tên
+- Group keys: `fiori-elements`, `fiori-freestyle`, `tool-services`.
+- Category thư mục: chữ thường, dùng `-` thay cho khoảng trắng (vd: `getting-started`, `routing`).
+- File HTML: chữ thường, dùng `-` (vd: `create-fe-app.html`).
+- `id` trong manifest: duy nhất, dùng `-` (vd: `fe-create-app`).
+
+## Tiêu chuẩn nội dung HTML
+- Ngôn ngữ: tiếng Việt.
+- Layout tối giản, dùng CSS inline nhỏ gọn (không phụ thuộc build tool).
+- Có tiêu đề chính `<h1>`, mục tiêu, bước thực hiện, và ví dụ code (`<pre><code>`).
+- Trích dẫn nguồn/tài liệu khi cần (link chuẩn, mở tab mới).
+
+## Cập nhật trang chủ
+- Mọi hướng dẫn phải được thêm vào `src/utils/guidesManifest.ts` với: `id`, `title`, `group`, `category`, `path`.
+- `path` bắt đầu bằng `/guides/...` (được serve từ `public/`).
+
+## OData (FE hướng dẫn)
+- Có thể dùng URL demo/public khi không có backend.
+- Phân biệt rõ OData V2 vs V4 và các khác biệt phổ biến (annotations, draft, actions...).
+
+## CI/CD & Deploy
+- Dùng Vite dev cho local (npm run dev).
+- GitHub Pages có thể dùng workflow hiện tại (deploy toàn bộ build).
+
+## Đóng góp
+- Tạo file HTML mới trong `public/guides/<group>/<category>/<slug>.html`.
+- Thêm entry tương ứng vào `src/utils/guidesManifest.ts`.
+- Kiểm tra local và tạo PR.
+

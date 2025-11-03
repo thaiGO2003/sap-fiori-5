@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fiori Elements: Tạo một ứng dụng SAP Fiori Elements</title>
+    <style>
+      body{font-family:system-ui,Arial,sans-serif;max-width:980px;margin:24px auto;padding:0 16px;line-height:1.7}
+      h1{margin:0 0 8px}
+      h2{margin-top:28px}
+      h3{margin-top:18px}
+      .note{background:#e7f3ff;border-left:4px solid #1677ff;padding:10px 12px;border-radius:6px}
+      .warn{background:#fff3cd;border-left:4px solid #ffb300;padding:10px 12px;border-radius:6px}
+      pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow:auto}
+      code{font-family:ui-monospace,Consolas,monospace}
+      ul{margin-top:6px}
+      .topbar{position:sticky;top:0;background:#0f1221;color:#e8eaf6;border:1px solid #24263b;border-radius:12px;padding:10px 12px;display:flex;gap:12px;align-items:center;margin-bottom:16px}
+      .topbar a{color:#e8eaf6;text-decoration:none;background:#171a2b;border:1px solid #2a2d47;padding:8px 10px;border-radius:10px}
+      .topbar input{flex:1;min-width:200px;padding:8px 10px;border-radius:10px;border:1px solid #2a2d47;background:#171a2b;color:#e8eaf6}
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <a href="/">🏠 Home</a>
+      <a href="/index.html#fe">Fiori Elements</a>
+      <a href="/index.html#ff">Fiori Free Style</a>
+      <a href="/index.html#tools">Tool Services</a>
+      <input id="q" placeholder="Tìm kiếm... (Enter để tìm)">
+    </div>
+    <script>document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter'){location.href='/'+'?q='+encodeURIComponent(e.target.value)}})</script>
+    <h1>Tạo một ứng dụng SAP Fiori Elements</h1>
+    <p>Hướng dẫn tổng quát, giải thích các tùy chọn khi khởi tạo ứng dụng Fiori Elements (FE) bằng SAP Fiori tools (VS Code/BAS).</p>
+
+    <div class="note"><strong>Lưu ý:</strong> FE hỗ trợ OData V2 và OData V4. Chọn phiên bản phù hợp với service backend của bạn. Frontend có thể chạy độc lập, tiêu thụ service từ Destination/URL.</div>
+
+    <h2>1) Chọn Template FE</h2>
+    <ul>
+      <li><strong>List Report Object Page (LROP)</strong>: Danh sách + trang chi tiết; phù hợp CRUD trên entity chính.</li>
+      <li><strong>Worklist</strong>: Tập trung vào danh sách công việc để xử lý nhanh (giản lược hơn LROP).</li>
+      <li><strong>Analytical List Page (ALP)</strong>: Kết hợp biểu đồ + bảng để phân tích và khoan sâu dữ liệu.</li>
+      <li><strong>Overview Page (OVP)</strong>: Thẻ (cards) tổng quan từ nhiều nguồn dữ liệu.</li>
+      <li><strong>Fiori Elements v4/v2</strong>: Chọn tùy theo phiên bản OData (V4 dùng FE v4, V2 dùng FE v2).</li>
+    </ul>
+
+    <h2>2) App Details</h2>
+    <ul>
+      <li><strong>App Title / Subtitle</strong>: Tiêu đề hiển thị trên shell và trang.</li>
+      <li><strong>Project folder</strong>: Thư mục tạo mã nguồn.</li>
+      <li><strong>Namespace / Application ID</strong>: Định danh duy nhất (ví dụ <code>com.my.company</code>).</li>
+      <li><strong>Minimum UI5 version</strong>: Phiên bản SAPUI5 dự kiến (nên dùng mặc định khuyến nghị).</li>
+      <li><strong>Flexible Column Layout (FCL)</strong>: Bật để có layout 2-3 cột (master-detail), hữu ích với LROP.</li>
+    </ul>
+
+    <h2>3) Data Source</h2>
+    <ul>
+      <li><strong>OData Service</strong>:
+        <ul>
+          <li><em>Use a URL</em>: nhập URL service (Destination/URL trực tiếp).</li>
+          <li><em>Use a local CAP project</em>: trỏ tới service local (phục vụ mock/dev).</li>
+          <li><em>Use metadata file</em>: cung cấp file EDMX, sau đó cấu hình runtime URL sau.</li>
+        </ul>
+      </li>
+      <li><strong>OData Version</strong>: Chọn V2 hoặc V4 theo backend.</li>
+      <li><strong>Authentication</strong>: Tùy môi trường (None/Basic/OAuth/destination qua BTP).</li>
+    </ul>
+
+    <h2>4) Entity & Navigation</h2>
+    <ul>
+      <li><strong>Entity Set</strong>: Bộ sưu tập chính để hiển thị trong List Report.</li>
+      <li><strong>Navigation</strong>: Chọn association từ entity chính tới entity chi tiết (Object Page).</li>
+      <li><strong>Draft</strong>: Bật nếu service hỗ trợ draft (OData V4/có annotations Draft).</li>
+    </ul>
+
+    <h2>5) Table & Presentation</h2>
+    <ul>
+      <li><strong>Table Type</strong>:
+        <ul>
+          <li><em>Responsive Table</em>: Tối ưu mobile.</li>
+          <li><em>Grid/Table/Analytical Table</em>: Dữ liệu lớn, nhiều cột.</li>
+        </ul>
+      </li>
+      <li><strong>Variant Management</strong>: Lưu bộ lọc/cột sắp xếp dưới dạng biến thể.</li>
+      <li><strong>Multi-Select</strong>: Cho phép chọn nhiều dòng để thao tác hàng loạt.</li>
+    </ul>
+
+    <h2>6) Annotations</h2>
+    <ul>
+      <li><strong>Annotation Sources</strong>:
+        <ul>
+          <li><em>Local annotations</em>: Tạo file <code>annotation.xml</code> trong app.</li>
+          <li><em>Service annotations</em>: Sử dụng từ metadata của service.</li>
+          <li><em>Both</em>: Kết hợp, local để override/extend.</li>
+        </ul>
+      </li>
+      <li>Các annotation thường dùng: <code>UI.LineItem</code>, <code>UI.HeaderInfo</code>, <code>UI.Facets</code>, <code>UI.SelectionFields</code>.</li>
+    </ul>
+
+    <h2>7) Features</h2>
+    <ul>
+      <li><strong>Filter Bar</strong>: Bật/ẩn thanh lọc, định nghĩa trường lọc bằng <code>@UI.SelectionFields</code>.</li>
+      <li><strong>Create/Edit/Delete</strong>: Bật nút CRUD nếu service cho phép.</li>
+      <li><strong>Action Buttons</strong>: Thêm hành động tuỳ biến (bound/unbound actions).</li>
+      <li><strong>Search</strong>: Hỗ trợ full-text khi service khai báo <code>@Search.searchable</code>.</li>
+    </ul>
+
+    <h2>8) Deployment & Configuration</h2>
+    <ul>
+      <li><strong>App Router / Fiori Launchpad</strong>: Chọn cách chạy độc lập hoặc deploy lên Launchpad (BTP).</li>
+      <li><strong>Destination</strong>: Thiết lập trỏ tới OData service thông qua BTP.</li>
+      <li><strong>Build</strong>: Sử dụng <code>npm run build</code> (hoặc tool tương đương) để tạo artefacts.</li>
+    </ul>
+
+    <h3>Ví dụ manifest (rút gọn, FE V4)</h3>
+    <pre><code>{
+  "sap.app": {
+    "id": "com.my.company.feapp",
+    "dataSources": {
+      "mainService": {
+        "type": "OData",
+        "settings": { "odataVersion": "4.0" },
+        "uri": "/odata/v4/service/"
+      }
+    }
+  },
+  "sap.ui5": {
+    "dependencies": { "minUI5Version": "1.120.0" },
+    "routing": { /* routes/targets FE */ }
+  }
+}</code></pre>
+
+    <div class="warn"><strong>Mẹo:</strong> Nếu chưa có backend, có thể dùng mock data hoặc service public OData để phát triển UI trước.</div>
+
+  </body>
+  </html>
+
+
