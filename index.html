@@ -286,6 +286,26 @@
                     <li>Chờ vài phút để setup hoàn tất</li>
                 </ol>
 
+                <h3>Cài đặt CAP Development Kit (Nếu phát triển local)</h3>
+                <p>Nếu bạn muốn phát triển CAP application trên máy local, cài đặt CDS Development Kit:</p>
+                
+                <div class="code-block">
+                    <code># Cài đặt CAP Development Kit
+npm install -g @sap/cds-dk
+
+# Kiểm tra cài đặt
+cds version
+
+# Cài đặt thêm công cụ hỗ trợ
+npm install -g sqlite3
+npm install -g @sap/cds-hana</code>
+                </div>
+
+                <div class="info">
+                    <strong>💡 Lưu ý:</strong> Cần cài đặt Node.js (version 16+) trước khi cài CAP DK. 
+                    Tải tại <a href="https://nodejs.org/" target="_blank">nodejs.org</a>
+                </div>
+
                 <div class="info">
                     <strong>💡 Mẹo:</strong> Đảm bảo bạn đã kích hoạt đầy đủ các services: 
                     Business Application Studio, Destination, và OData Provisioning.
