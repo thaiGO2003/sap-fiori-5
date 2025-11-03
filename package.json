@@ -1,0 +1,28 @@
+{
+  "name": "sap-fiori-incident-app-tutorial",
+  "version": "1.0.0",
+  "description": "Hướng dẫn tạo ứng dụng SAP Fiori OData V4 Incident Management",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 8080 -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sap",
+    "fiori",
+    "odata-v4",
+    "incident-management",
+    "tutorial",
+    "vietnamese"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/sap-fiori-incident-app.git"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
+

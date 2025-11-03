@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Ứng dụng Quản lý Sự cố với SAP Fiori Elements cho OData V4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .intro ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .intro li {
+            margin-bottom: 8px;
+        }
+
+        .step {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .step h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .step h3 {
+            color: #495057;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .step p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .code-block code {
+            color: #e2e8f0;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+    }
+
+    .success {
+        background: #d4edda;
+        border-left: 4px solid #28a745;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 5px;
+    }
+
+    ul, ol {
+        margin-left: 20px;
+        margin-bottom: 15px;
+    }
+
+    li {
+        margin-bottom: 8px;
+    }
+
+    a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 15px 0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    footer {
+        background: #343a40;
+        color: white;
+        padding: 30px;
+        text-align: center;
+    }
+
+    footer p {
+        margin-bottom: 10px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .table th,
+    .table td {
+        border: 1px solid #dee2e6;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .table th {
+        background: #667eea;
+        color: white;
+        font-weight: bold;
+    }
+
+    .table tr:nth-child(even) {
+        background: #f8f9fa;
+    }
+
+    @media (max-width: 768px) {
+        header h1 {
+            font-size: 1.8em;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .step {
+            padding: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Tạo Ứng dụng Quản lý Sự cố</h1>
+            <p>Với SAP Fiori Elements cho OData V4</p>
+        </header>
+
+        <div class="content">
+            <section class="intro">
+                <h2>📋 Giới thiệu</h2>
+                <p>
+                    Hướng dẫn này sẽ giúp bạn tạo một ứng dụng quản lý sự cố (Incident Management) sử dụng 
+                    <strong>SAP Fiori Elements</strong> và <strong>OData V4</strong>. Đây là một ứng dụng 
+                    đầy đủ tính năng có thể tạo, đọc, cập nhật và xóa sự cố.
+                </p>
+                <p><strong>Bạn sẽ học được:</strong></p>
+                <ul>
+                    <li>✅ Thiết lập môi trường phát triển SAP Fiori</li>
+                    <li>✅ Sử dụng Business Application Studio</li>
+                    <li>✅ Tạo ứng dụng List Report và Object Page với Fiori Elements</li>
+                    <li>✅ Tích hợp OData V4 service</li>
+                    <li>✅ Triển khai ứng dụng</li>
+                </ul>
+            </section>
+
+            <section class="step">
+                <h2><span class="step-number">1</span> Yêu cầu Tiên quyết</h2>
+                <h3>Đăng ký SAP BTP Trial Account</h3>
+                <p>
+                    Bạn cần có một tài khoản SAP Business Technology Platform (BTP) trial. Nếu chưa có, 
+                    đăng ký tại <a href="https://www.sap.com/cmp/td/sap-cloud-platform-trial.html" target="_blank">SAP BTP Trial</a>.
+                </p>
+
+                <h3>Kích hoạt Business Application Studio</h3>
+                <ol>
+                    <li>Truy cập SAP BTP Cockpit</li>
+                    <li>Trong trial account, chọn "Services" → "Business Application Studio"</li>
+                    <li>Nhấn "Create" để tạo một space mới</li>
+                    <li>Chọn subscription "Full-stack cloud application"</li>
+                    <li>Chờ vài phút để setup hoàn tất</li>
+                </ol>
+
+                <div class="info">
+                    <strong>💡 Mẹo:</strong> Đảm bảo bạn đã kích hoạt đầy đủ các services: 
+                    Business Application Studio, Destination, và OData Provisioning.
+                </div>
+            </section>
+
+            <section class="step">
+                <h2><span class="step-number">2</span> Tạo Project SAP Fiori Application</h2>
+                
+                <h3>Khởi động Business Application Studio</h3>
+                <ol>
+                    <li>Mở Business Application Studio từ BTP Cockpit</li>
+                    <li>Chọn "Dev Space" → "SAP Fiori" template</li>
+                    <li>Nhấn "Create Dev Space" và đợi khởi động</li>
+                    <li>Click "Open" để mở workspace</li>
+                </ol>
+
+                <h3>Tạo Application từ Template</h3>
+                <ol>
+                    <li>Trong Business Application Studio, chọn <strong>File → New → Project from Template</strong></li>
+                    <li>Chọn template <strong>"SAP Fiori Elements List Report Application"</strong></li>
+                    <li>Click Next</li>
+                </ol>
+
+                <h3>Cấu hình Basic Information</h3>
+                <ul>
+                    <li><strong>Module Name:</strong> <code class="highlight">incidentmanagement</code></li>
+                    <li><strong>Application Title:</strong> <code class="highlight">Incident Management</code></li>
+                    <li><strong>Namespace:</strong> <code class="highlight">com.sap.incident</code></li>
+                    <li><strong>Description:</strong> <code class="highlight">Application for managing incidents</code></li>
+                </ul>
+
+                <h3>Chọn Data Source</h3>
+                <ol>
+                    <li>Chọn <strong>"Use a remote OData service"</strong></li>
+                    <li>Nhập service URL: <code class="highlight">https://services.odata.org/V4/OData/OData.svc</code></li>
+                    <li>Nhấn "Discover" để load metadata</li>
+                    <li>Chọn Entity Set: <code class="highlight">Products</code></li>
+                </ol>
+
+                <div class="code-block">
+                    <code>
+                        Namespace: com.sap.incident
+                        Application ID: IncidentManagement
+                        Entity Set: Incidents
+                    </code>
+                </div>
+
+                <div class="success">
+                    <strong>✅ Hoàn tất:</strong> Project đã được tạo với cấu trúc thư mục chuẩn SAP Fiori.
+                </div>
+            </section>
+
+            <section class="step">
+                <h2><span class="step-number">3</span> Cấu hình Fiori Elements Manifest</h2>
+                
+                <h3>Chỉnh sửa manifest.json</h3>
+                <p>File manifest.json là trái tim của ứng dụng SAP Fiori, nó định nghĩa toàn bộ cấu hình.</p>
+
+                <h3>Thiết lập App Settings</h3>
+                <div class="code-block">
+                    <code>{
+  "sap.app": {
+    "id": "com.sap.incident.IncidentManagement",
+    "type": "application",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "Incident Management",
+    "description": "Manage incidents with SAP Fiori Elements"
+  }
+}</code>
+                </div>
+
+                <h3>Cấu hình Data Source</h3>
+                <div class="code-block">
+                    <code>{
+  "sap.app": {
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/incidentmanagement/srvd/sap/incidentmanagement/0001/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  }
+}</code>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Lưu ý:</strong> Đảm bảo URI của data source khớp với OData service của bạn.
+                </div>
+
+                <h3>Thiết lập List Report</h3>
+                <div class="code-block">
+                    <code>{
+  "sap.ui5": {
+    "routing": {
+      "config": {
+        "routerClass": "sap.f.routing.Router",
+        "viewType": "XML"
+      },
+      "routes": [{
+        "pattern": "",
+        "name": "ListReport",
+        "target": "ListReport"
+      }],
+      "targets": {
+        "ListReport": {
+          "viewName": "ListReport",
+          "viewLevel": 1,
+          "type": "View"
+        }
+      }
+    }
+  }
+}</code>
+                </div>
+            </section>
+
+            <section class="step">
+                <h2><span class="step-number">4</span> Tạo và Cấu hình OData V4 Service</h2>
+                
+                <h3>Tạo CAP Service Definition</h3>
+                <p>Sử dụng SAP Cloud Application Programming (CAP) để tạo OData V4 service:</p>
+
+                <div class="code-block">
+                    <code>service IncidentManagement {
+  entity Incidents {
+    key ID: UUID;
+    Title: String(100);
+    Priority: String(20);
+    Status: String(20);
+    Description: String(500);
+    CreatedAt: DateTime;
+    CreatedBy: String(100);
+    AssignedTo: String(100);
+  }
+}</code>
+                </div>
+
+                <h3>Tạo Sample Data</h3>
+                <div class="code-block">
+                    <code>[
+  {
+    "ID": "550e8400-e29b-41d4-a716-446655440000",
+    "Title": "Server downtime",
+    "Priority": "High",
+    "Status": "New",
+    "Description": "Production server crashed",
+    "CreatedAt": "2024-01-15T10:30:00Z",
+    "CreatedBy": "Admin",
+    "AssignedTo": "IT Support"
+  }
+]</code>
+                </div>
+
+                <div class="info">
+                    <strong>💡 Hướng dẫn:</strong> Đặt file CSV trong thư mục <code>db/data</code> 
+                    của CAP project để load sample data tự động.
+                </div>
+            </section>
+
+            <section class="step">
+                <h2><span class="step-number">5</span> Cấu hình Annotations</h2>
+                
+                <h3>UI Annotations cho List Report</h3>
+                <p>Annotations giúp Fiori Elements tự động tạo UI phù hợp.</p>
+
+                <div class="code-block">
+                    <code>@UI.LineItem: [
+  {
+    $Type: 'UI.DataField',
+    Value: Title,
+    Label: 'Title'
+  },
+  {
+    $Type: 'UI.DataField',
+    Value: Priority,
+    Label: 'Priority'
+  },
+  {
+    $Type: 'UI.DataField',
+    Value: Status,
+    Label: 'Status'
+  }
+]
+
+@UI.HeaderInfo: {
+  TypeName: 'Incident',
+  TypeNamePlural: 'Incidents'
+}</code>
+                </div>
+
+                <h3>Selection Fields</h3>
+                <div class="code-block">
+                    <code>@Search.searchable: true
+@UI.SelectionFields: [
+  Title,
+  Priority,
+  Status
+]</code>
+                </div>
+
+                <h3>Object Page Annotations</h3>
+                <div class="code-block">
+                    <code>@UI.Facets: [
+  {
+    $Type: 'UI.ReferenceFacet',
+    Target: '@UI.FieldGroup#Details'
+  }
+]
+
+@UI.FieldGroup#Details: {
+  Data: [
+    {
+      $Type: 'UI.DataField',
+      Value: Description
+    },
+    {
+      $Type: 'UI.DataField',
+      Value: CreatedAt
+    },
+    {
+      $Type: 'UI.DataField',
+      Value: AssignedTo
+    }
+  ]
+}</code>
+                </div>
+
+                <div class="success">
+                    <strong>✅ Kết quả:</strong> Object Page sẽ tự động hiển thị các trường này 
+                    trong các section được tổ chức rõ ràng.
+                </div>
+            </section>
+
+            <section class="step">
+                <h2><span class="step-number">6</span> Preview và Test Application</h2>
+                
+                <h3>Chạy Application Locally</h3>
+                <ol>
+                    <li>Trong Business Application Studio, mở Terminal</li>
+                    <li>Chạy lệnh: <code class="highlight">npm start</code></li>
+                    <li>Ứng dụng sẽ mở trong browser với mock data</li>
+                </ol>
+
+                <div class="code-block">
+                    <code>cd incidentmanagement
+npm start</code>
+                </div>
+
+                <h3>Connect đến Real OData Service</h3>
+                <ol>
+                    <li>Deploy CAP service lên Cloud Foundry</li>
+                    <li>Update destination trong BTP Cockpit</li>
+                    <li>Configure data source trong manifest.json</li>
+                    <li>Refresh application để load real data</li>
+                </ol>
+
+                <div class="info">
+                    <strong>💡 Testing Checklist:</strong>
+                    <ul>
+                        <li>✓ List Report hiển thị đúng danh sách incidents</li>
+                        <li>✓ Filtering và sorting hoạt động</li>
+                        <li>✓ Click vào item mở Object Page</li>
+                        <li>✓ Create new incident thành công</li>
+                        <li>✓ Edit và Save incident hoạt động</li>
+                        <li>✓ Delete confirmation dialog hiển thị</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="step">
+                <h2><span class="step-number">7</span> Deploy Application</h2>
+                
+                <h3>Build Application</h3>
+                <div class="code-block">
+                    <code>npm run build</code>
+                </div>
+                <p>File build sẽ được tạo trong thư mục <code>dist</code>.</p>
+
+                <h3>Deploy lên SAP BTP</h3>
+                <ol>
+                    <li>Login vào Cloud Foundry: <code class="highlight">cf login</code></li>
+                    <li>Build MTA: <code class="highlight">mbt build</code></li>
+                    <li>Deploy: <code class="highlight">cf deploy mta_archives/incidentmanagement_1.0.0.mtar</code></li>
+                </ol>
+
+                <div class="code-block">
+                    <code># Install MTA builder
+npm install -g mbt
+
+# Build and deploy
+mbt build
+cf deploy mta_archives/incidentmanagement_1.0.0.mtar</code>
+                </div>
+
+                <h3>Kiểm tra Deployment</h3>
+                <ol>
+                    <li>Truy cập BTP Cockpit → Applications</li>
+                    <li>Tìm application "IncidentManagement"</li>
+                    <li>Mở application URL để test</li>
+                </ol>
+
+                <div class="success">
+                    <strong>✅ Hoàn tất:</strong> Ứng dụng đã được deploy thành công lên SAP BTP!
+                </div>
+            </section>
+
+            <section class="step">
+                <h2><span class="step-number">8</span> Tùy chỉnh và Mở rộng</h2>
+                
+                <h3>Custom Actions</h3>
+                <p>Thêm custom actions vào List Report:</p>
+                <div class="code-block">
+                    <code>@UI.lineItem: [
+  {
+    $Type: 'UI.DataFieldForAction',
+    Action: 'com.sap.incident.IncidentManagement.Close'
+  }
+]</code>
+                </div>
+
+                <h3>Custom Sections trong Object Page</h3>
+                <div class="code-block">
+                    <code>@UI.Facets: [
+  {
+    $Type: 'UI.ReferenceFacet',
+    Target: '@UI.FieldGroup#Attachments',
+    Label: 'Attachments'
+  }
+]</code>
+                </div>
+
+                <h3>Analytics Charts</h3>
+                <p>Thêm charts để phân tích dữ liệu:</p>
+                <div class="code-block">
+                    <code>@UI.Chart: {
+  Title: 'Incidents by Priority',
+  ChartType: #Bar
+}</code>
+                </div>
+
+                <h3>Side Effects</h3>
+                <div class="code-block">
+                    <code>@Capabilities.UpdateRestrictions: {
+  Updatable: true,
+  UpdatableAlternateKey: true
+}
+@Capabilities.DeleteRestrictions: {
+  Deletable: true
+}</code>
+                </div>
+
+                <div class="info">
+                    <strong>📚 Tài liệu tham khảo thêm:</strong>
+                    <ul>
+                        <li><a href="https://cap.cloud.sap/docs/" target="_blank">CAP Documentation</a></li>
+                        <li><a href="https://sapui5.hana.ondemand.com/" target="_blank">SAP UI5 Documentation</a></li>
+                        <li><a href="https://experience.sap.com/fiori-design-web/" target="_blank">Fiori Design Guidelines</a></li>
+                        <li><a href="https://developers.sap.com/learn" target="_blank">SAP Learning Journey</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="step">
+                <h2><span class="step-number">9</span> Tổng kết</h2>
+                
+                <div class="success">
+                    <h3>🎉 Chúc mừng!</h3>
+                    <p>Bạn đã hoàn thành việc tạo một ứng dụng quản lý sự cố đầy đủ tính năng với:</p>
+                    <ul>
+                        <li>✅ List Report với filtering và sorting</li>
+                        <li>✅ Object Page với detailed view</li>
+                        <li>✅ Create, Read, Update, Delete operations</li>
+                        <li>✅ Responsive design theo Fiori Guidelines</li>
+                        <li>✅ OData V4 integration</li>
+                        <li>✅ Deployed lên SAP BTP</li>
+                    </ul>
+                </div>
+
+                <h3>Bước tiếp theo</h3>
+                <ul>
+                    <li>🔹 Thêm authentication và authorization</li>
+                    <li>🔹 Tích hợp với SAP SuccessFactors hoặc other SAP systems</li>
+                    <li>🔹 Thêm real-time notifications</li>
+                    <li>🔹 Export data to Excel/PDF</li>
+                    <li>🔹 Implement advanced analytics</li>
+                </ul>
+
+                <h3>Resources</h3>
+                <table class="table">
+                    <tr>
+                        <th>Resource</th>
+                        <th>Link</th>
+                    </tr>
+                    <tr>
+                        <td>SAP BTP Trial</td>
+                        <td><a href="https://www.sap.com/cmp/td/sap-cloud-platform-trial.html" target="_blank">Get Free Trial</a></td>
+                    </tr>
+                    <tr>
+                        <td>Business Application Studio</td>
+                        <td><a href="https://help.sap.com/products/SAP%20Business%20Application%20Studio" target="_blank">Documentation</a></td>
+                    </tr>
+                    <tr>
+                        <td>CAP Framework</td>
+                        <td><a href="https://cap.cloud.sap/" target="_blank">CAP Guide</a></td>
+                    </tr>
+                    <tr>
+                        <td>SAP Community</td>
+                        <td><a href="https://community.sap.com/topics/fiori" target="_blank">Join Community</a></td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+
+        <footer>
+            <p><strong>Created with ❤️ for SAP Fiori Developers</strong></p>
+            <p>📧 Questions? Join the <a href="https://community.sap.com/" target="_blank" style="color: #fff;">SAP Community</a></p>
+            <p style="margin-top: 20px; opacity: 0.8;">© 2024 SAP Fiori Tutorial | Educational Purpose Only</p>
+        </footer>
+    </div>
+</body>
+</html>
+
