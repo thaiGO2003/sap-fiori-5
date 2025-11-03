@@ -32,8 +32,15 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
+          # Deploy all files including multi-page lessons
       
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      
+      - name: Verify deployment
+        run: |
+          echo "✅ Deployment successful!"
+          echo "🌐 Single Page: ${{ steps.deployment.outputs.page_url }}"
+          echo "📚 Multi-Page: ${{ steps.deployment.outputs.page_url }}index-multi.html"
 

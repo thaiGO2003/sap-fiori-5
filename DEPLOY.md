@@ -63,17 +63,56 @@ Trang web của bạn đã live tại:
 https://YOUR-USERNAME.github.io/sap-fiori-incident-app/
 ```
 
+### 🌐 Multi-Page Support
+
+Project hỗ trợ **2 loại tutorial**:
+
+1. **Single Page**: `index.html` - Tất cả trong 1 trang
+2. **Multi-Page**: `index-multi.html` - Nhiều bài học riêng biệt
+
+**Truy cập:**
+- Single Page: `https://YOUR-USERNAME.github.io/sap-fiori-incident-app/`
+- Multi-Page: `https://YOUR-USERNAME.github.io/sap-fiori-incident-app/index-multi.html`
+
+GitHub Pages tự động serve tất cả HTML files!
+
 ## 🔄 Update trang web
 
-Mỗi khi bạn push code mới lên:
-
+### Update Single Page
 ```bash
-git add .
-git commit -m "Update content"
+git add index.html
+git commit -m "Update single page tutorial"
 git push
 ```
 
-GitHub Actions sẽ tự động build và deploy lại trang web mới!
+### Thêm bài học mới (Multi-Page)
+```bash
+# 1. Copy template và tạo bài mới
+cp template-lesson.html lesson-08-my-topic.html
+
+# 2. Edit nội dung
+code lesson-08-my-topic.html
+
+# 3. Update index-multi.html (thêm vào course grid)
+
+# 4. Commit và push
+git add lesson-08-my-topic.html index-multi.html
+git commit -m "Add lesson 08: My Topic"
+git push
+```
+
+**✅ GitHub Actions tự động deploy tất cả!**
+
+### Workflow tự động
+
+Mỗi khi bạn push lên branch `main`:
+1. ✅ GitHub Actions trigger
+2. ✅ Build và test (nếu có)
+3. ✅ Deploy lên GitHub Pages
+4. ✅ Tất cả files HTML available
+5. ✅ Nội dung live ngay lập tức
+
+**Không cần setup gì thêm!**
 
 ## 🐛 Troubleshooting
 
@@ -81,10 +120,13 @@ GitHub Actions sẽ tự động build và deploy lại trang web mới!
 - ✅ Đợi 3-5 phút sau khi enable Pages
 - ✅ Kiểm tra branch name phải là `main`
 - ✅ Kiểm tra file `index.html` có ở root folder không
+- ✅ Thử truy cập `index-multi.html` nếu single page không hoạt động
 
 ### Lỗi: "Build failed"
 - ✅ Check tab **Actions** để xem lỗi gì
 - ✅ Đảm bảo file `.github/workflows/deploy.yml` đúng
+- ✅ Xem logs chi tiết trong GitHub Actions
+- ✅ Check có lỗi syntax HTML/CSS không
 
 ### Lỗi: Push bị reject
 ```bash
@@ -94,6 +136,17 @@ git pull origin main --rebase
 # Push lại
 git push
 ```
+
+### Lỗi: Links giữa các bài không hoạt động
+- ✅ Check relative paths: `lesson-01.html` (not `/lesson-01.html`)
+- ✅ Test local trước khi push: mở file HTML trong browser
+- ✅ Kiểm tra tên file exact match (case-sensitive)
+
+### CI/CD không chạy
+- ✅ Check branch name là `main` (not `master`)
+- ✅ Check file `.github/workflows/deploy.yml` tồn tại
+- ✅ Vào Settings → Actions → cho phép workflows run
+- ✅ Click "Run workflow" manual trong Actions tab
 
 ## 📞 Cần hỗ trợ?
 
