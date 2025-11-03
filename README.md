@@ -52,17 +52,27 @@ cd sap-fiori-incident-app
 
 ## 🚀 Deploy
 
-### Automatic (CI/CD)
+📖 **Chi tiết hướng dẫn deploy**: Xem file [DEPLOY.md](DEPLOY.md)
 
-- Push code lên branch `main`
-- GitHub Actions tự động deploy lên GitHub Pages
-- Check deployment status trong tab "Actions"
+### Quick Deploy
 
-### Manual
+1. Tạo repository mới trên GitHub
+2. Push code lên GitHub:
+```bash
+git remote add origin https://github.com/YOUR-USERNAME/sap-fiori-incident-app.git
+git push -u origin main
+```
 
-1. Vào Settings → Pages
-2. Chọn branch `main` và folder `/ (root)`
-3. Save
+3. Enable GitHub Pages:
+   - Vào **Settings → Pages**
+   - Chọn branch `main` và folder `/ (root)`
+   - Save và đợi 2-3 phút
+
+### Automatic CI/CD
+
+- GitHub Actions đã được cấu hình sẵn
+- Mỗi khi push code lên branch `main`, trang web tự động được deploy
+- Check deployment status trong tab **"Actions"**
 
 ## 📝 License
 
